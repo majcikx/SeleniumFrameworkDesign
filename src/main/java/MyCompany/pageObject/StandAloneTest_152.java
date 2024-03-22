@@ -1,4 +1,4 @@
-package MyCompany;
+package MyCompany.pageObject;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.bouncycastle.jcajce.provider.drbg.DRBG;
@@ -18,17 +18,16 @@ public class StandAloneTest_152 {
 
     public static void main(String[] args) {
         //WebDriverManager.chromedriver().setup();
+        String productName = "ZARA COAT 3";
         WebDriver driver = new ChromeDriver();
         //setup of general wait for test
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://rahulshettyacademy.com/client");
 
-        String productName = "ZARA COAT 3";
         //MxTest@gmail.com/Password123
-        driver.findElement(By.id("userEmail")).sendKeys("MxTest@gmail.com");
-        driver.findElement(By.id("userPassword")).sendKeys("Password123");
-        driver.findElement(By.id("login")).click();
+        LandingPage_159 landingPage = new LandingPage_159(driver);
+        landingPage.goTo();
+        landingPage.loginApplication("MxTest@gmail.com","Password123");
 
         List<WebElement> products = driver.findElements(By.cssSelector(".mb-3"));
 
@@ -56,7 +55,7 @@ public class StandAloneTest_152 {
         a.sendKeys(driver.findElement(By.cssSelector("[placeholder='Select Country']")),"india").build().perform();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
-        driver.findElement(By.xpath("//button[contains(@class,'ta-item')])[2]")).click();
+        driver.findElement(By.xpath("//button[contains(@class,'ta-item')] [2]")).click();
         driver.findElement(By.cssSelector(".action__submit")).click();
 
         String confirmMessage = driver.findElement(By.cssSelector(".hero-primary")).getText();
